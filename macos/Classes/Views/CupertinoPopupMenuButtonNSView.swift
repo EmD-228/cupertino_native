@@ -276,7 +276,8 @@ class CupertinoPopupMenuButtonNSView: NSView {
 
   private func rebuildMenu(defaultSizes: [NSNumber]? = nil, defaultColors: [NSNumber]? = nil) {
     popupMenu = NSMenu()
-    let count = max(labels.count, max(symbols.count, dividers.count))
+    popupMenu.autoenablesItems = false
+    let count = max(labels.count, max(symbols.count, max(dividers.count, max(enabled.count, checked.count))))
     for i in 0..<count {
       if i < dividers.count, dividers[i] {
         popupMenu.addItem(.separator())
@@ -286,7 +287,8 @@ class CupertinoPopupMenuButtonNSView: NSView {
       let mi = NSMenuItem(title: title, action: #selector(onSelectMenuItem(_:)), keyEquivalent: "")
       mi.target = self
       mi.tag = i
-      if i < enabled.count { mi.isEnabled = enabled[i] }
+      let isEnabled = i < enabled.count ? enabled[i] : true
+      mi.isEnabled = isEnabled
       if i < checked.count { mi.state = checked[i] ? .on : .off }
       if i < symbols.count, !symbols[i].isEmpty {
         if var img = NSImage(systemSymbolName: symbols[i], accessibilityDescription: nil) {
