@@ -174,7 +174,7 @@ class _CNTabBarState extends State<CNTabBar> {
       final w = _intrinsicWidth;
       return SizedBox(height: h, width: w, child: platformView);
     }
-    return SizedBox(height: h, child: platformView);
+    return SizedBox(height: h, width: h, child: platformView);
   }
 
   void _onCreated(int id) {
