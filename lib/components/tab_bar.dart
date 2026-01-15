@@ -170,7 +170,7 @@ class _CNTabBarState extends State<CNTabBar> {
           );
 
     final h = widget.height ?? _intrinsicHeight ?? 50.0;
-    if (!widget.split && widget.shrinkCentered) {
+   (widget.shrinkCentered && _intrinsicWidth != null){
       final w = _intrinsicWidth;
       return SizedBox(height: h, width: w, child: platformView);
     }
